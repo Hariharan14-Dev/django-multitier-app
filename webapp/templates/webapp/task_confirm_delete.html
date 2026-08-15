@@ -1,0 +1,37 @@
+{% extends "webapp/base.html" %}
+
+{% block title %}
+    Delete Work
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>Delete Work</h1>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ task.title }}</strong>?
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="button danger"
+        >
+            Delete
+        </button>
+
+        <a href="{% url 'task_list' %}">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

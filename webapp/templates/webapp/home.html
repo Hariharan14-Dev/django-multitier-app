@@ -1,0 +1,37 @@
+{% extends "webapp/base.html" %}
+
+{% block title %}WorkNest - Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge">Work Management Platform</span>
+
+        <h1>
+            Organize your work.<br>
+            <span>Achieve more.</span>
+        </h1>
+
+        <p>
+            WorkNest is a Django-based task management platform
+            designed to help you organize, track, and complete your work efficiently.
+        </p>
+
+        <div class="hero-actions">
+            {% if user.is_authenticated %}
+                <a href="{% url 'task_list' %}" class="btn btn-primary">
+                    View My Tasks
+                </a>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-primary">
+                    Get Started
+                </a>
+
+                <a href="{% url 'login' %}" class="btn btn-secondary">
+                    Sign In
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

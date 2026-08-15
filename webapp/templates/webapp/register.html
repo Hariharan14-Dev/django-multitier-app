@@ -1,0 +1,73 @@
+{% extends "webapp/base.html" %}
+
+{% block title %}
+    Create Account - WorkNest
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <div class="auth-header">
+
+            <h1>Create Account</h1>
+
+            <p>
+                Start managing your tasks today
+            </p>
+
+        </div>
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    {{ field.label_tag }}
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div class="help-text">
+                            {{ field.help_text|safe }}
+                        </div>
+                    {% endif %}
+
+                    {{ field.errors }}
+
+                </div>
+
+            {% endfor %}
+
+
+            <button type="submit"
+                    class="btn btn-primary btn-full">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

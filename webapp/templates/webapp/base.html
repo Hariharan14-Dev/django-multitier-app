@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}WorkNest{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'webapp/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+
+        <div class="navbar-container">
+
+            <a href="{% url 'home' %}" class="brand">
+
+                <span class="brand-icon">
+                    W
+                </span>
+
+                WorkNest
+
+            </a>
+
+            <nav class="nav-links">
+
+                {% if user.is_authenticated %}
+
+                    <span class="nav-user">
+                        Hi, {{ user.username }}
+                    </span>
+
+                    <a href="{% url 'task_list' %}">
+                        Tasks
+                    </a>
+
+                    <a href="{% url 'task_create' %}">
+                        Create Task
+                    </a>
+
+                    <a href="{% url 'logout' %}">
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                    <a href="{% url 'register' %}">
+                        Register
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Django Messages -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message message-{{ message.tags }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- Main Content -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © {% now "Y" %} TaskFlow.
+                Built with Django & PostgreSQL.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="{% static 'webapp/js/app.js' %}"></script>
+
+</body>
+
+</html>

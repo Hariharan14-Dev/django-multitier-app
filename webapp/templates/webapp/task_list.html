@@ -1,0 +1,180 @@
+{% extends "webapp/base.html" %}
+
+{% block title %}
+    My Tasks - WorkNest
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="page-header">
+
+        <div>
+            <h1>My Work</h1>
+
+            <p>
+                Manage and track your work.
+            </p>
+        </div>
+
+        <a href="{% url 'task_create' %}"
+           class="btn btn-primary">
+            + Create Work
+        </a>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="task-stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Total Work
+            </div>
+
+            <div class="stat-value">
+                {{ tasks|length }}
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Active
+            </div>
+
+            <div class="stat-value">
+                {{ active_count|default:"0" }}
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Completed
+            </div>
+
+            <div class="stat-value">
+                {{ completed_count|default:"0" }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if tasks %}
+
+        <div class="task-list">
+
+            {% for task in tasks %}
+
+                <article class="task-card">
+
+                    <div class="task-card-header">
+
+                        <div>
+
+                            <h2 class="task-title">
+                                {{ task.title }}
+                            </h2>
+
+                            {% if task.description %}
+
+                                <p class="task-description">
+                                    {{ task.description }}
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="task-actions">
+
+                            <a href="{% url 'task_update' task.pk %}"
+                               class="action-edit">
+                                Edit
+                            </a>
+
+                            <a href="{% url 'task_delete' task.pk %}"
+                               class="action-delete">
+                                Delete
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-meta">
+
+                        {% if task.status == "completed" %}
+
+                            <span class="badge badge-completed">
+                                Completed
+                            </span>
+
+                        {% elif task.status == "in_progress" %}
+
+                            <span class="badge badge-progress">
+                                In Progress
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge badge-todo">
+                                To Do
+                            </span>
+
+                        {% endif %}
+
+
+                        {% if task.due_date %}
+
+                            <span class="badge badge-todo">
+                                Due: {{ task.due_date }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <div class="empty-state-icon">
+                ✓
+            </div>
+
+            <h2>No work yet</h2>
+
+            <p>
+                Create your first work item to get started.
+            </p>
+
+            <a href="{% url 'task_create' %}"
+               class="btn btn-primary">
+                Create Work
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
