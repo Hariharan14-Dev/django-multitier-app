@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "worknest.fullname" . }}
+  labels:
+    app: {{ include "worknest.name" . }}
+
+spec:
+  type: {{ .Values.service.type }}
+
+  selector:
+    app: {{ include "worknest.name" . }}
+
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "worknest.fullname" . }}-config
+data:
+  DJANGO_DEBUG: {{ .Values.django.debug | quote }}
+  DJANGO_ALLOWED_HOSTS: {{ .Values.django.allowedHosts | quote }}
+
+  POSTGRES_DB: {{ .Values.postgresql.database | quote }}
+  POSTGRES_USER: {{ .Values.postgresql.username | quote }}
+  POSTGRES_HOST: {{ include "worknest.fullname" . }}-postgres
+  POSTGRES_PORT: {{ .Values.postgresql.port | quote }}
