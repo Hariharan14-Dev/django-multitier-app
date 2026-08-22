@@ -1,27 +1,17 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual environment
 venv/
 .venv/
 env/
+__pycache__/
+*.py[cod]
 
-# Environment variables
 .env
+.env.*
 
-# Django
 staticfiles/
-media/
 
-# IDE
+.pytest_cache/
+.coverage
+htmlcov/
+
 .vscode/
 .idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log

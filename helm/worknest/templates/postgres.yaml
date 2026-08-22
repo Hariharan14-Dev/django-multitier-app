@@ -18,7 +18,6 @@ spec:
     spec:
       containers:
         - name: postgres
-
           image: {{ .Values.postgresql.image }}
 
           ports:
